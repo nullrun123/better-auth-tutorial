@@ -47,6 +47,8 @@ export function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const redirect = searchParams.get("redirect");
+
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -74,7 +76,7 @@ export function SignInForm() {
         }else{
           // pop up
           toast.success("Signed in successfully");
-          router.push("/dashboard");
+          router.push(redirect ?? "/dashboard");
         }
   }
 
@@ -84,7 +86,7 @@ export function SignInForm() {
 
     const { error } = await signIn.social({
       provider,
-      callbackURL:"/dashboard"
+      callbackURL:redirect ?? "/dashboard",
     }) 
     setLoading(false);
 
