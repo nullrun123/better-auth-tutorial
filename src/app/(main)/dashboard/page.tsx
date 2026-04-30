@@ -39,8 +39,11 @@ export default async function DashboardPage() {
           </p>
         </div>
         {/* TODO: Use actual user data */}
-        <EmailVerificationAlert />
-        <ProfileInformation />
+        
+        {
+          !user.emailVerified && <EmailVerificationAlert />
+        }
+        <ProfileInformation user={user} />
       </div>
     </main>
   );

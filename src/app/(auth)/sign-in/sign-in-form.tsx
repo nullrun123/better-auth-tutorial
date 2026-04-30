@@ -79,7 +79,18 @@ export function SignInForm() {
   }
 
   async function handleSocialSignIn(provider: "google" | "github") {
-    // TODO: Handle social sign in
+    setError(null);
+    setLoading(true);
+
+    const { error } = await signIn.social({
+      provider,
+      callbackURL:"/dashboard"
+    }) 
+    setLoading(false);
+
+    if(error){
+      setError(error.message || "Soemething is wrong");
+    }
   }
 
   return (
@@ -164,6 +175,7 @@ export function SignInForm() {
             </LoadingButton>
 
             <div className="flex w-full flex-col items-center justify-between gap-2">
+              {/* btn google */}
               <Button
                 type="button"
                 variant="outline"
@@ -175,6 +187,7 @@ export function SignInForm() {
                 Sign in with Google
               </Button>
 
+              {/* btn github */}
               <Button
                 type="button"
                 variant="outline"

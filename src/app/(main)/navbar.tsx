@@ -30,7 +30,7 @@ export async function Navbar() {
         </Link>
         <div className="flex items-center gap-2">
           <ModeToggle />
-          <UserDropdown />
+          <UserDropdown user={user} />
         </div>
       </div>
     </header>

@@ -15,15 +15,15 @@ import {
 } from "./ui/dropdown-menu";
 import { signOut } from "@/lib/auth-client";
 import { toast } from "sonner";
+import { User } from "@/lib/auth";
 
-export function UserDropdown() {
-  // TODO: Render real user info
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    image: undefined,
-    role: "admin",
-  };
+interface UserDropdownProps {
+  user:User;
+}
+
+export function UserDropdown({user}:UserDropdownProps) {
+  
+
 
   return (
     <DropdownMenu>
@@ -51,8 +51,9 @@ export function UserDropdown() {
             <UserIcon className="size-4" /> <span>Profile</span>
           </Link>
         </DropdownMenuItem>
-        {/* TODO: Hide admin item for non-admin users */}
-        <AdminItem />
+        {/* เฉพาะมี role admin ถึงจะมี */}
+        { user.role === "admin" && <AdminItem/>}
+     
         <SignOutItem />
       </DropdownMenuContent>
     </DropdownMenu>
